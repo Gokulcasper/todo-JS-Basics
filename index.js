@@ -20,17 +20,17 @@ let inputElement = document.createElement("input");
 inputElement.type="checkbox";
 inputElement.classList.add("checkboxClassInput");
 inputElement.id="addCheckbox";
-addItemContainer.appendChild(inputElement);
+liElement.appendChild(inputElement);
 
 let divElement = document.createElement("div");
-divElement.classList.add("todo-divElement");
-addItemContainer.appendChild(divElement);
+divElement.classList.add("todo-divElement","d-flex","flex-row");
+liElement.appendChild(divElement);
 
 let labelElement = document.createElement("label");
 labelElement.textContent=todo.text;
 labelElement.setAttribute("for","addCheckbox");
 labelElement.classList.add("labelClassInput");
-addItemContainer.appendChild(labelElement);
+divElement.appendChild(labelElement);
 
 }
 // let inputElement = document.createElement("input");
