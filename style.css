@@ -66,3 +66,6 @@ align-items: center;
 .delete-icon {
     padding: 20px; 
 }
+.checked{
+    text-decoration: line-through;
+}

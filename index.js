@@ -17,25 +17,42 @@ let todoList= [
     },
 ]
 
-
-
 let todoListCounts = todoList.length;
-console.log(todoListCounts);
+
+function onTodoStatusChange(labelId)
+{
+    // let checkboxIdElement = document.getElementById(checkbox);
+    
+    let labelIdElement = document.getElementById(labelId);
+labelIdElement.classList.toggle("checked");
+}
+
+
+function onDeleteTodo(todoId){
+let todoDeleteElement =document.getElementById(todoId);
+addItemContainer.removeChild(todoDeleteElement);
+}
+
 function createAndAppendTodo(todo){
     let todoId ="todo" + todo.id;
     let checkboxId ="checkbox" + todo.id;
-    let label ="label" + todo.id;
+    let labelId ="label" + todo.id;
 
 
     let liElement = document.createElement("li");
 liElement.classList.add("todo-li-class","d-flex","flex-row");
+liElement.id=todoId;
 addItemContainer.appendChild(liElement);
 
 let inputElement = document.createElement("input");
 inputElement.type="checkbox";
 inputElement.classList.add("checkboxClassInput");
 inputElement.id=checkboxId;
+    inputElement.onclick=function(){
+    onTodoStatusChange(labelId);
+}
 liElement.appendChild(inputElement);
+
 
 let divElement = document.createElement("div");
 divElement.classList.add("todo-divElement","d-flex","flex-row");
@@ -44,6 +61,7 @@ liElement.appendChild(divElement);
 let labelElement = document.createElement("label");
 labelElement.textContent=todo.text;
 labelElement.setAttribute("for",checkboxId);
+labelElement.id=labelId;
 labelElement.classList.add("labelClassInput");
 divElement.appendChild(labelElement);
 
@@ -53,11 +71,11 @@ divElement.appendChild(deleteDivElement);
 
 let deleteIcon = document.createElement("i");
 deleteIcon.classList.add("ri-delete-bin-fill", "delete-icon" );
-deleteDivElement.appendChild(deleteIcon)
 
-deleteIcon.onclick=function(){
+deleteIcon.onclick = function(){
     onDeleteTodo(todoId);
 };
+deleteDivElement.appendChild(deleteIcon)
 }
 
 for(let todo of todoList){
