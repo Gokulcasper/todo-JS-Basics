@@ -32,7 +32,19 @@ labelElement.setAttribute("for","addCheckbox");
 labelElement.classList.add("labelClassInput");
 divElement.appendChild(labelElement);
 
+let deleteDivElement = document.createElement("div");
+deleteDivElement.classList.add("delete-div-container")
+divElement.appendChild(deleteDivElement);
+
+let deleteIcon = document.createElement("i");
+deleteIcon.classList.add("ri-delete-bin-fill", "delete-icon" );
+deleteDivElement.appendChild(deleteIcon)
 }
+
+
+
+
+
 // let inputElement = document.createElement("input");
 // inputElement.type="checkbox";
 // inputElement.id="addCheckbox";
