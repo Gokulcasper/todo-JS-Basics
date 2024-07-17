@@ -1,6 +1,6 @@
-let addItemContainer = document.getElementById("todoList-id");
-let todoInputId = document.getElementById("todo-id-input");
-let todoAddButton = document.getElementById("todo-id-addButton");
+let inputIdElement = document.getElementById("todo-id-input");
+let addButtonIdElement = document.getElementById("todo-id-addButton");
+let ulIdElement = document.getElementById("todoList-id");
 
 let todoList= [
     {
@@ -16,93 +16,88 @@ let todoList= [
         id:3
     },
 ]
-
-let todoListCounts = todoList.length;
-
-function onTodoStatusChange(labelId)
-{
-    // let checkboxIdElement = document.getElementById(checkbox);
-    
-    let labelIdElement = document.getElementById(labelId);
-labelIdElement.classList.toggle("checked");
+let todoListLength = todoList.length;
+function onChangeStatus(labelId){
+   let todoLabelElementId = document.getElementById(labelId);
+   todoLabelElementId.classList.toggle("checked");
 }
 
 
 function onDeleteTodo(todoId){
-let todoDeleteElement =document.getElementById(todoId);
-addItemContainer.removeChild(todoDeleteElement);
+   let todoDeleteElementId = document.getElementById(todoId);
+   ulIdElement.removeChild(todoDeleteElementId);
 }
 
-function createAndAppendTodo(todo){
-    let todoId ="todo" + todo.id;
-    let checkboxId ="checkbox" + todo.id;
-    let labelId ="label" + todo.id;
+function createAndAppendTodo(todo){ 
+    let todoId="todo"+todo.id;
+    let checkboxId="checkbok"+todo.id;
+    let labelId="label"+todo.id;
 
 
-    let liElement = document.createElement("li");
-liElement.classList.add("todo-li-class","d-flex","flex-row");
+let liElement = document.createElement("li");
+liElement.classList.add("todo-li-class");
 liElement.id=todoId;
-addItemContainer.appendChild(liElement);
+ulIdElement.appendChild(liElement);
 
 let inputElement = document.createElement("input");
 inputElement.type="checkbox";
-inputElement.classList.add("checkboxClassInput");
 inputElement.id=checkboxId;
-    inputElement.onclick=function(){
-    onTodoStatusChange(labelId);
-}
+inputElement.classList.add("checkboxClassInput");
 liElement.appendChild(inputElement);
 
+inputElement.onclick=function(){
+    onChangeStatus(labelId)
+}
 
-let divElement = document.createElement("div");
-divElement.classList.add("todo-divElement","d-flex","flex-row");
-liElement.appendChild(divElement);
+let divlabelContainer = document.createElement("div");
+divlabelContainer.classList.add("todo-divElement");
+liElement.appendChild(divlabelContainer);
 
 let labelElement = document.createElement("label");
 labelElement.textContent=todo.text;
 labelElement.setAttribute("for",checkboxId);
-labelElement.id=labelId;
 labelElement.classList.add("labelClassInput");
-divElement.appendChild(labelElement);
+labelElement.id=labelId;
+divlabelContainer.appendChild(labelElement);
 
-let deleteDivElement = document.createElement("div");
-deleteDivElement.classList.add("delete-div-container")
-divElement.appendChild(deleteDivElement);
+let divDeleteIconContainer = document.createElement("div");
+divDeleteIconContainer.classList.add("delete-div-container");
+divlabelContainer.appendChild(divDeleteIconContainer);
 
-let deleteIcon = document.createElement("i");
-deleteIcon.classList.add("ri-delete-bin-fill", "delete-icon" );
+let DeleteIconElement = document.createElement("i");
+DeleteIconElement.classList.add("ri-delete-bin-fill", "delete-icon" );
+divDeleteIconContainer.appendChild(DeleteIconElement);
 
-deleteIcon.onclick = function(){
+DeleteIconElement.onclick=function(){
     onDeleteTodo(todoId);
-};
-deleteDivElement.appendChild(deleteIcon)
 }
 
-for(let todo of todoList){
-createAndAppendTodo(todo);
+}
+
+for(let todo of todoList)
+{
+    createAndAppendTodo(todo);
+    
+}
+
+function  onAddTodo(){
+    let inputElementValue = inputIdElement.value;
+    if(inputElementValue == "")
+    {
+    alert("Please Enter The Value");
+    return
+    }
+    todoListCount = todoListLength+1;
+    let TodoIncreaseCount=
+    {
+        text:inputElementValue,
+        id:todoListCount
+    }
+    createAndAppendTodo(TodoIncreaseCount);
+    inputIdElement.value=" ";
 }
 
 
-function onAddTodo(){
-   let userInputValue = todoInputId.value;
-   console.log(userInputValue);
-   if(userInputValue == ""){
-    alert("Enter Value");
-    return;
-   }
-   todoListCounts = todoListCounts+1;
-   let newTodo = {
-    text:userInputValue,
-    id:todoListCounts,
-   };
-
-   createAndAppendTodo(newTodo);
-   todoInputId.value= " ";
-}
-
-
-
-
-todoAddButton.onclick=function(){
+addButtonIdElement.onclick=function(){
     onAddTodo();
 }
