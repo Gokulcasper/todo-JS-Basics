@@ -3,37 +3,29 @@ let addButtonIdElement = document.getElementById("todo-id-addButton");
 let ulIdElement = document.getElementById("todoList-id");
 let todoSaveButton = document.getElementById("todoSaveButton");
 
-let todoList= [
-    {
-        text:" Learn Html ",
-        id:1
-    },
-    {
-        text:" Learn Css ",
-        id:2
-    },
-    {
-        text:" Learn JS ",
-        id:3
-    },
-]
+function getItem(){
+    let getData = localStorage.getItem("todoJSONValues");
+    let parseData = JSON.parse(getData);
+    return parseData;
+}
+
+let todoList= getItem();
 
 let todoListLength = todoList.length;
+console.log(todoListLength);
 
 todoSaveButton.onclick=function(){
-let todoJSONValues=JSON.stringify(todoList);
-    localStorage.setItem("todoJSONValues",todoJSONValues)
+    localStorage.setItem("todoJSONValues",JSON.stringify(todoList));
+}
+
+function onDeleteTodo(todoId){
+    let todoDeleteElementId = document.getElementById(todoId);
+    ulIdElement.removeChild(todoDeleteElementId);
 }
 
 function onChangeStatus(labelId){
     let todoLabelElementId = document.getElementById(labelId);
     todoLabelElementId.classList.toggle("checked");
-}
-
-
-function onDeleteTodo(todoId){
-    let todoDeleteElementId = document.getElementById(todoId);
-    ulIdElement.removeChild(todoDeleteElementId);
 }
 
 function createAndAppendTodo(todo){ 
