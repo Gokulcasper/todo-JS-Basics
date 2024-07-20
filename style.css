@@ -29,6 +29,16 @@ border: none;
 border-radius: 5px;
 }
 
+.todo-save-button{
+    margin: 10px 0;
+font-size: 20px;
+padding: 7px 20px;
+background-color: rgba(0, 102, 255, 0.973);
+color: white;
+border: none;
+border-radius: 5px;
+}
+
 .checkboxClassInput{
     height: 20px;
     width: 20px; 

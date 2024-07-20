@@ -1,6 +1,7 @@
 let inputIdElement = document.getElementById("todo-id-input");
 let addButtonIdElement = document.getElementById("todo-id-addButton");
 let ulIdElement = document.getElementById("todoList-id");
+let todoSaveButton = document.getElementById("todoSaveButton");
 
 let todoList= [
     {
@@ -16,19 +17,27 @@ let todoList= [
         id:3
     },
 ]
+
 let todoListLength = todoList.length;
+
+todoSaveButton.onclick=function(){
+let todoJSONValues=JSON.stringify(todoList);
+    localStorage.setItem("todoJSONValues",todoJSONValues)
+}
+
 function onChangeStatus(labelId){
-   let todoLabelElementId = document.getElementById(labelId);
-   todoLabelElementId.classList.toggle("checked");
+    let todoLabelElementId = document.getElementById(labelId);
+    todoLabelElementId.classList.toggle("checked");
 }
 
 
 function onDeleteTodo(todoId){
-   let todoDeleteElementId = document.getElementById(todoId);
-   ulIdElement.removeChild(todoDeleteElementId);
+    let todoDeleteElementId = document.getElementById(todoId);
+    ulIdElement.removeChild(todoDeleteElementId);
 }
 
 function createAndAppendTodo(todo){ 
+    console.log(todo)
     let todoId="todo"+todo.id;
     let checkboxId="checkbok"+todo.id;
     let labelId="label"+todo.id;
@@ -44,8 +53,8 @@ inputElement.type="checkbox";
 inputElement.id=checkboxId;
 inputElement.classList.add("checkboxClassInput");
 liElement.appendChild(inputElement);
-
-inputElement.onclick=function(){
+inputElement.onclick=function()
+{
     onChangeStatus(labelId)
 }
 
@@ -67,8 +76,8 @@ divlabelContainer.appendChild(divDeleteIconContainer);
 let DeleteIconElement = document.createElement("i");
 DeleteIconElement.classList.add("ri-delete-bin-fill", "delete-icon" );
 divDeleteIconContainer.appendChild(DeleteIconElement);
-
-DeleteIconElement.onclick=function(){
+DeleteIconElement.onclick=function()
+{
     onDeleteTodo(todoId);
 }
 
@@ -93,6 +102,8 @@ function  onAddTodo(){
         text:inputElementValue,
         id:todoListCount
     }
+
+    todoList.push(TodoIncreaseCount);
     createAndAppendTodo(TodoIncreaseCount);
     inputIdElement.value=" ";
 }
